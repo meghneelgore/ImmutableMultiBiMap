@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/KeyInsensitiveBiMap.iml" filepath="$PROJECT_DIR$/.idea/modules/KeyInsensitiveBiMap.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/KeyInsensitiveBiMap_main.iml" filepath="$PROJECT_DIR$/.idea/modules/KeyInsensitiveBiMap_main.iml" group="KeyInsensitiveBiMap" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/KeyInsensitiveBiMap_test.iml" filepath="$PROJECT_DIR$/.idea/modules/KeyInsensitiveBiMap_test.iml" group="KeyInsensitiveBiMap" />
+    </modules>
+  </component>
+</project>
