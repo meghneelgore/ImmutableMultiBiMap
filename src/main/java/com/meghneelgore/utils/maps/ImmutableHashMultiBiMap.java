@@ -1,17 +1,12 @@
 package com.meghneelgore.utils.maps;
 
+import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Multimap;
+
 import java.util.*;
 
 /**
- * A multiple bimap builds on the idea of a multimap and a bimap. The bimap restricts the user to have unique keys
- * as well as values. The ImmutableMultiBiMap has no such restriction, however. This also leads to the inverse() function
- * to return a map from V -> Set<K> because ostensibly, there may be multiple keys that map to the same value.
- * <p>
- * The ImmutableHashMultiBiMap is backed by a HashMap.
- *
- * IMPORTANT
- * THIS MAP IS ONLY INVERTIBLE ONE WAY, I.E. AN INVERTED MAP CAN'T BE INVERTED AGAIN TO GET THE ORIGINAL BACK. IT IS
- * THEREFORE INCUMBENT UPON THE USER TO SAVE ANY ORIGINAL MAP(S) ON THEIR OWN.
+ * An {@code ImmutalbeMultiBiMap} backed by a HashMap.
  */
 
 public class ImmutableHashMultiBiMap<K, V> implements ImmutableMultiBiMap<K, V> {
@@ -22,16 +17,15 @@ public class ImmutableHashMultiBiMap<K, V> implements ImmutableMultiBiMap<K, V> 
     private final HashMap<K, V> hashMap;
 
     /**
-     * Whether the map was already inverted
+     * Save the inverted map. We calculate the inversion at build time since this is an immutable map.
      */
-    private boolean inverted;
+    private Multimap<V, K> invertedMap;
 
     /**
      * Protected construction. This is in keeping with the general API adhered to by the Guava classes too.
      */
     protected ImmutableHashMultiBiMap(int numEntries) {
         hashMap = new HashMap<>(numEntries);
-        inverted = false;
     }
 
     /**
@@ -47,12 +41,14 @@ public class ImmutableHashMultiBiMap<K, V> implements ImmutableMultiBiMap<K, V> 
         ImmutableHashMultiBiMap<K, V> immutableMultiBiMap = new ImmutableHashMultiBiMap<>(2);
         immutableMultiBiMap.hashMap.put(key1, value1);
         immutableMultiBiMap.hashMap.put(key2, value2);
+        immutableMultiBiMap.invertedMap = immutableMultiBiMap.inverse();
         return immutableMultiBiMap;
     }
 
 
     /**
      * Convenience builder for arbitrary number of key-value pairs
+     *
      * @param <K> Key type
      * @param <V> Value type
      */
@@ -63,13 +59,13 @@ public class ImmutableHashMultiBiMap<K, V> implements ImmutableMultiBiMap<K, V> 
             listOfEntries = new ArrayList<>();
         }
 
-        public void put(K key, V value){
+        public void put(K key, V value) {
             listOfEntries.add(new AbstractMap.SimpleImmutableEntry<>(key, value));
         }
 
         public ImmutableHashMultiBiMap<K, V> build() {
             ImmutableHashMultiBiMap<K, V> map = new ImmutableHashMultiBiMap<>(listOfEntries.size());
-            for(Entry<K, V> entry: listOfEntries) {
+            for (Entry<K, V> entry : listOfEntries) {
                 map.hashMap.put(entry.getKey(), entry.getValue());
             }
             return map;
@@ -78,32 +74,22 @@ public class ImmutableHashMultiBiMap<K, V> implements ImmutableMultiBiMap<K, V> 
 
 
     /**
-     * Inverts the multi bimap to give a map from V -> InversionSet<K>
+     * Inverts the multi bimap to give a multimap [ V -> K ]
      *
      * @return
      */
     @Override
-    public ImmutableHashMultiBiMap<V, InversionSet<K>> inverse() {
+    public Multimap<V, K> inverse() {
+        if(invertedMap != null) return invertedMap;
 
-        Collection<V> valueSet = hashMap.values();
-
-        if(inverted) {
-            throw new UnsupportedOperationException("Map is already inverted");
-        }
-
-        ImmutableHashMultiBiMap<V, InversionSet<K>> returnedMap = new ImmutableHashMultiBiMap<>(valueSet.size());
+        ImmutableMultimap.Builder<V, K> builder = new ImmutableMultimap.Builder<>();
 
         for (K key : hashMap.keySet()) {
             V value = hashMap.get(key);
-            InversionSet<K> keySet = returnedMap.get(value);
-            if (keySet == null) {
-                keySet = new InversionSet<>();
-            }
-            keySet.hashSet.add(key);
-            returnedMap.hashMap.put(value, keySet);
+            builder.put(value, key);
+
         }
-        returnedMap.inverted = !inverted;
-        return returnedMap;
+        return builder.build();
     }
 
     @Override
