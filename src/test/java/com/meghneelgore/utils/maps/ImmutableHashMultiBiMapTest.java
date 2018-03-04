@@ -34,10 +34,11 @@ public class ImmutableHashMultiBiMapTest {
         builder.put("Callow", 3);
 
         ImmutableHashMultiBiMap<String, Integer> map = builder.build();
+        Multimap<Integer, String> invertedMap = map.inverse();
 
-        //ImmutableHashMultiBiMap mapInverse = map.inverse();
-        //Assert.assertEquals("Wrong number of keys in inverse map", 3, mapInverse.keySet().size());
-        //Assert.assertEquals("Wrong number of values in inverse map", 2, ((Set)mapInverse.get(1)).size());
+        Multimap<Integer, String> mapInverse = map.inverse();
+        Assert.assertEquals("Wrong number of keys in inverse map", 3, mapInverse.keySet().size());
+        Assert.assertEquals("Wrong number of values in inverse map", 2, mapInverse.get(1).size());
     }
 
 }

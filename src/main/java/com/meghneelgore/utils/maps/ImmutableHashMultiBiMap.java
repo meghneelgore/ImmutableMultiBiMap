@@ -41,13 +41,13 @@ public class ImmutableHashMultiBiMap<K, V> implements ImmutableMultiBiMap<K, V> 
         ImmutableHashMultiBiMap<K, V> immutableMultiBiMap = new ImmutableHashMultiBiMap<>(2);
         immutableMultiBiMap.hashMap.put(key1, value1);
         immutableMultiBiMap.hashMap.put(key2, value2);
-        immutableMultiBiMap.invertedMap = immutableMultiBiMap.inverse();
+        immutableMultiBiMap.invertedMap = immutableMultiBiMap.internalInvert();
         return immutableMultiBiMap;
     }
 
 
     /**
-     * Convenience builder for arbitrary number of key-value pairs
+     * Convenience builder for an arbitrary number of key-value pairs.
      *
      * @param <K> Key type
      * @param <V> Value type
@@ -59,8 +59,9 @@ public class ImmutableHashMultiBiMap<K, V> implements ImmutableMultiBiMap<K, V> 
             listOfEntries = new ArrayList<>();
         }
 
-        public void put(K key, V value) {
+        public Builder<K, V> put(K key, V value) {
             listOfEntries.add(new AbstractMap.SimpleImmutableEntry<>(key, value));
+            return this;
         }
 
         public ImmutableHashMultiBiMap<K, V> build() {
@@ -68,26 +69,28 @@ public class ImmutableHashMultiBiMap<K, V> implements ImmutableMultiBiMap<K, V> 
             for (Entry<K, V> entry : listOfEntries) {
                 map.hashMap.put(entry.getKey(), entry.getValue());
             }
+            map.invertedMap = map.internalInvert();
             return map;
         }
     }
 
 
-    /**
-     * Inverts the multi bimap to give a multimap [ V -> K ]
-     *
-     * @return
-     */
     @Override
     public Multimap<V, K> inverse() {
+        return invertedMap;
+    }
+
+    /**
+     * Inverts the multi bimap to give a MultiMap<V, K>
+     *
+     * @return The inverted map
+     */
+    private Multimap<V, K> internalInvert() {
         if(invertedMap != null) return invertedMap;
-
         ImmutableMultimap.Builder<V, K> builder = new ImmutableMultimap.Builder<>();
-
         for (K key : hashMap.keySet()) {
             V value = hashMap.get(key);
             builder.put(value, key);
-
         }
         return builder.build();
     }
