@@ -14,7 +14,6 @@ public class ImmutableHashMultiBiMapTest {
     @Test
     public void testInverseForSameValues() {
         ImmutableHashMultiBiMap<String, Integer> map = ImmutableHashMultiBiMap.of("Hello", 1, "World", 1);
-
         Multimap<Integer, String> mapInverse = map.inverse();
 
         Assert.assertEquals("Wrong number of keys in inverse map", mapInverse.keySet().size(), 1);
