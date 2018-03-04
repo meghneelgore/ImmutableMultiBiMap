@@ -26,15 +26,9 @@ public class ImmutableHashMultiBiMapTest {
     @Test
     public void testBuilder() {
         ImmutableHashMultiBiMap.Builder<String, Integer> builder = new ImmutableHashMultiBiMap.Builder<>();
-        builder.put("Hello", 1);
-        builder.put("Mello", 1);
-        builder.put("Jello", 2);
-        builder.put("Fellow", 2);
-        builder.put("Callow", 3);
+        builder.put("Hello", 1).put("Mello", 1).put("Jello", 2).put("Fellow", 2).put("Callow", 3);
 
         ImmutableHashMultiBiMap<String, Integer> map = builder.build();
-        Multimap<Integer, String> invertedMap = map.inverse();
-
         Multimap<Integer, String> mapInverse = map.inverse();
         Assert.assertEquals("Wrong number of keys in inverse map", 3, mapInverse.keySet().size());
         Assert.assertEquals("Wrong number of values in inverse map", 2, mapInverse.get(1).size());
