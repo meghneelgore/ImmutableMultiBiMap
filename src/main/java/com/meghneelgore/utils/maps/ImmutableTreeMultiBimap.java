@@ -8,22 +8,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * An ImmutableMultiBiMap backed by an {@code ImmutableSortedMap}
+ * An ImmutableMultiBimap backed by an {@code ImmutableSortedMap}
  */
-public class ImmutableTreeMultiBiMap<K extends Comparable<K>, V> extends BaseImmutableMultiBiMap<K, V> {
+public class ImmutableTreeMultiBimap<K extends Comparable<K>, V> extends BaseImmutableMultiBimap<K, V> {
 
-    protected ImmutableTreeMultiBiMap() {
+    protected ImmutableTreeMultiBimap() {
 
     }
 
     /**
      * Returns an immutable map containing a single entry.
      */
-    public static <K extends Comparable<K>, V> ImmutableTreeMultiBiMap<K, V> of(K key1, V value1) {
-        ImmutableTreeMultiBiMap<K, V> immutableMultiBiMap = new ImmutableTreeMultiBiMap<>();
-        immutableMultiBiMap.backingMap = ImmutableSortedMap.of(key1, value1);
-        immutableMultiBiMap.invertedMap = immutableMultiBiMap.internalInvert();
-        return immutableMultiBiMap;
+    public static <K extends Comparable<K>, V> ImmutableTreeMultiBimap<K, V> of(K key1, V value1) {
+        ImmutableTreeMultiBimap<K, V> immutableMultiBimap = new ImmutableTreeMultiBimap<>();
+        immutableMultiBimap.backingMap = ImmutableSortedMap.of(key1, value1);
+        immutableMultiBimap.invertedMap = immutableMultiBimap.internalInvert();
+        return immutableMultiBimap;
     }
 
     /**
@@ -33,11 +33,11 @@ public class ImmutableTreeMultiBiMap<K extends Comparable<K>, V> extends BaseImm
      * @throws IllegalArgumentException if any two keys are equal according to
      *                                  their natural ordering
      */
-    public static <K extends Comparable<K>, V> ImmutableTreeMultiBiMap<K, V> of(K key1, V value1, K key2, V value2) {
-        ImmutableTreeMultiBiMap<K, V> immutableMultiBiMap = new ImmutableTreeMultiBiMap<>();
-        immutableMultiBiMap.backingMap = ImmutableSortedMap.of(key1, value1, key2, value2);
-        immutableMultiBiMap.invertedMap = immutableMultiBiMap.internalInvert();
-        return immutableMultiBiMap;
+    public static <K extends Comparable<K>, V> ImmutableTreeMultiBimap<K, V> of(K key1, V value1, K key2, V value2) {
+        ImmutableTreeMultiBimap<K, V> immutableMultiBimap = new ImmutableTreeMultiBimap<>();
+        immutableMultiBimap.backingMap = ImmutableSortedMap.of(key1, value1, key2, value2);
+        immutableMultiBimap.invertedMap = immutableMultiBimap.internalInvert();
+        return immutableMultiBimap;
     }
 
     /**
@@ -47,13 +47,13 @@ public class ImmutableTreeMultiBiMap<K extends Comparable<K>, V> extends BaseImm
      * @throws IllegalArgumentException if any two keys are equal according to
      *                                  their natural ordering
      */
-    public static <K extends Comparable<K>, V> ImmutableTreeMultiBiMap<K, V> of(K key1, V value1,
+    public static <K extends Comparable<K>, V> ImmutableTreeMultiBimap<K, V> of(K key1, V value1,
                                                                                 K key2, V value2,
                                                                                 K key3, V value3) {
-        ImmutableTreeMultiBiMap<K, V> immutableMultiBiMap = new ImmutableTreeMultiBiMap<>();
-        immutableMultiBiMap.backingMap = ImmutableSortedMap.of(key1, value1, key2, value2, key3, value3);
-        immutableMultiBiMap.invertedMap = immutableMultiBiMap.internalInvert();
-        return immutableMultiBiMap;
+        ImmutableTreeMultiBimap<K, V> immutableMultiBimap = new ImmutableTreeMultiBimap<>();
+        immutableMultiBimap.backingMap = ImmutableSortedMap.of(key1, value1, key2, value2, key3, value3);
+        immutableMultiBimap.invertedMap = immutableMultiBimap.internalInvert();
+        return immutableMultiBimap;
     }
 
     /**
@@ -63,14 +63,14 @@ public class ImmutableTreeMultiBiMap<K extends Comparable<K>, V> extends BaseImm
      * @throws IllegalArgumentException if any two keys are equal according to
      *                                  their natural ordering
      */
-    public static <K extends Comparable<K>, V> ImmutableTreeMultiBiMap<K, V> of(K key1, V value1,
+    public static <K extends Comparable<K>, V> ImmutableTreeMultiBimap<K, V> of(K key1, V value1,
                                                                                 K key2, V value2,
                                                                                 K key3, V value3,
                                                                                 K key4, V value4) {
-        ImmutableTreeMultiBiMap<K, V> immutableMultiBiMap = new ImmutableTreeMultiBiMap<>();
-        immutableMultiBiMap.backingMap = ImmutableSortedMap.of(key1, value1, key2, value2, key3, value3, key4, value4);
-        immutableMultiBiMap.invertedMap = immutableMultiBiMap.internalInvert();
-        return immutableMultiBiMap;
+        ImmutableTreeMultiBimap<K, V> immutableMultiBimap = new ImmutableTreeMultiBimap<>();
+        immutableMultiBimap.backingMap = ImmutableSortedMap.of(key1, value1, key2, value2, key3, value3, key4, value4);
+        immutableMultiBimap.invertedMap = immutableMultiBimap.internalInvert();
+        return immutableMultiBimap;
     }
 
     /**
@@ -80,15 +80,15 @@ public class ImmutableTreeMultiBiMap<K extends Comparable<K>, V> extends BaseImm
      * @throws IllegalArgumentException if any two keys are equal according to
      *                                  their natural ordering
      */
-    public static <K extends Comparable<K>, V> ImmutableTreeMultiBiMap<K, V> of(K key1, V value1,
+    public static <K extends Comparable<K>, V> ImmutableTreeMultiBimap<K, V> of(K key1, V value1,
                                                                                 K key2, V value2,
                                                                                 K key3, V value3,
                                                                                 K key4, V value4,
                                                                                 K key5, V value5) {
-        ImmutableTreeMultiBiMap<K, V> immutableMultiBiMap = new ImmutableTreeMultiBiMap<>();
-        immutableMultiBiMap.backingMap = ImmutableSortedMap.of(key1, value1, key2, value2, key3, value3, key4, value4, key5, value5);
-        immutableMultiBiMap.invertedMap = immutableMultiBiMap.internalInvert();
-        return immutableMultiBiMap;
+        ImmutableTreeMultiBimap<K, V> immutableMultiBimap = new ImmutableTreeMultiBimap<>();
+        immutableMultiBimap.backingMap = ImmutableSortedMap.of(key1, value1, key2, value2, key3, value3, key4, value4, key5, value5);
+        immutableMultiBimap.invertedMap = immutableMultiBimap.internalInvert();
+        return immutableMultiBimap;
     }
 
 
@@ -110,8 +110,8 @@ public class ImmutableTreeMultiBiMap<K extends Comparable<K>, V> extends BaseImm
             return this;
         }
 
-        public ImmutableTreeMultiBiMap<K, V> build() {
-            ImmutableTreeMultiBiMap<K, V> map = new ImmutableTreeMultiBiMap<>();
+        public ImmutableTreeMultiBimap<K, V> build() {
+            ImmutableTreeMultiBimap<K, V> map = new ImmutableTreeMultiBimap<>();
             ImmutableSortedMap.Builder<K, V> builder = new ImmutableSortedMap.Builder<>(Comparable::compareTo);
             for (Entry<K, V> entry : listOfEntries) {
                 builder.put(entry.getKey(), entry.getValue());

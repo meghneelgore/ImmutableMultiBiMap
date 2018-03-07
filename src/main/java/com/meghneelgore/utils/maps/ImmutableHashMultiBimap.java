@@ -7,23 +7,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * An {@code ImmutableMultiBiMap} backed by a HashMap.
+ * An {@code ImmutableMultiBimap} backed by a HashMap.
  */
 
-public class ImmutableHashMultiBiMap<K, V> extends BaseImmutableMultiBiMap<K, V> {
+public class ImmutableHashMultiBimap<K, V> extends BaseImmutableMultiBimap<K, V> {
 
     /**
      * Protected construction.
      */
-    protected ImmutableHashMultiBiMap() {
+    protected ImmutableHashMultiBimap() {
 
     }
 
     /**
      * Returns an immutable multibimap containing a single entry.
      */
-    public static <K, V> ImmutableHashMultiBiMap<K, V> of(K key1, V value1) {
-        ImmutableHashMultiBiMap<K, V> map = new ImmutableHashMultiBiMap<>();
+    public static <K, V> ImmutableHashMultiBimap<K, V> of(K key1, V value1) {
+        ImmutableHashMultiBimap<K, V> map = new ImmutableHashMultiBimap<>();
         map.backingMap = ImmutableMap.of(key1, value1);
         map.invertedMap = map.internalInvert();
         return map;
@@ -34,8 +34,8 @@ public class ImmutableHashMultiBiMap<K, V> extends BaseImmutableMultiBiMap<K, V>
      *
      * @throws IllegalArgumentException if duplicate keys are provided
      */
-    public static <K, V> ImmutableHashMultiBiMap<K, V> of(K key1, V value1, K key2, V value2) {
-        ImmutableHashMultiBiMap<K, V> map = new ImmutableHashMultiBiMap<>();
+    public static <K, V> ImmutableHashMultiBimap<K, V> of(K key1, V value1, K key2, V value2) {
+        ImmutableHashMultiBimap<K, V> map = new ImmutableHashMultiBimap<>();
         map.backingMap = ImmutableMap.of(key1, value1, key2, value2);
         map.invertedMap = map.internalInvert();
         return map;
@@ -46,8 +46,8 @@ public class ImmutableHashMultiBiMap<K, V> extends BaseImmutableMultiBiMap<K, V>
      *
      * @throws IllegalArgumentException if duplicate keys are provided
      */
-    public static <K, V> ImmutableHashMultiBiMap<K, V> of(K key1, V value1, K key2, V value2, K key3, V value3) {
-        ImmutableHashMultiBiMap<K, V> map = new ImmutableHashMultiBiMap<>();
+    public static <K, V> ImmutableHashMultiBimap<K, V> of(K key1, V value1, K key2, V value2, K key3, V value3) {
+        ImmutableHashMultiBimap<K, V> map = new ImmutableHashMultiBimap<>();
         map.backingMap = ImmutableMap.of(key1, value1, key2, value2, key3, value3);
         map.invertedMap = map.internalInvert();
         return map;
@@ -58,8 +58,8 @@ public class ImmutableHashMultiBiMap<K, V> extends BaseImmutableMultiBiMap<K, V>
      *
      * @throws IllegalArgumentException if duplicate keys are provided
      */
-    public static <K, V> ImmutableHashMultiBiMap<K, V> of(K key1, V value1, K key2, V value2, K key3, V value3, K key4, V value4) {
-        ImmutableHashMultiBiMap<K, V> map = new ImmutableHashMultiBiMap<>();
+    public static <K, V> ImmutableHashMultiBimap<K, V> of(K key1, V value1, K key2, V value2, K key3, V value3, K key4, V value4) {
+        ImmutableHashMultiBimap<K, V> map = new ImmutableHashMultiBimap<>();
         map.backingMap = ImmutableMap.of(key1, value1, key2, value2, key3, value3, key4, value4);
         map.invertedMap = map.internalInvert();
         return map;
@@ -70,8 +70,8 @@ public class ImmutableHashMultiBiMap<K, V> extends BaseImmutableMultiBiMap<K, V>
      *
      * @throws IllegalArgumentException if duplicate keys are provided
      */
-    public static <K, V> ImmutableHashMultiBiMap<K, V> of(K key1, V value1, K key2, V value2, K key3, V value3, K key4, V value4, K key5, V value5) {
-        ImmutableHashMultiBiMap<K, V> map = new ImmutableHashMultiBiMap<>();
+    public static <K, V> ImmutableHashMultiBimap<K, V> of(K key1, V value1, K key2, V value2, K key3, V value3, K key4, V value4, K key5, V value5) {
+        ImmutableHashMultiBimap<K, V> map = new ImmutableHashMultiBimap<>();
         map.backingMap = ImmutableMap.of(key1, value1, key2, value2, key3, value3, key4, value4, key5, value5);
         map.invertedMap = map.internalInvert();
         return map;
@@ -96,8 +96,8 @@ public class ImmutableHashMultiBiMap<K, V> extends BaseImmutableMultiBiMap<K, V>
             return this;
         }
 
-        public ImmutableHashMultiBiMap<K, V> build() {
-            ImmutableHashMultiBiMap<K, V> map = new ImmutableHashMultiBiMap<>();
+        public ImmutableHashMultiBimap<K, V> build() {
+            ImmutableHashMultiBimap<K, V> map = new ImmutableHashMultiBimap<>();
             ImmutableMap.Builder<K, V> builder = new ImmutableMap.Builder<>();
             for (Entry<K, V> entry : listOfEntries) {
                 builder.put(entry.getKey(), entry.getValue());

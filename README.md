@@ -1,11 +1,11 @@
-# ImmutableMultiBiMap
+# ImmutableMultiBimap
 
 A bimap allows the user to have an inverse view but constrains the user to have unique keys K _and_ values V so that it can 
 return an inverted map V -> K
 
 A multimap allows the user to have multiple values for the same key.
 
-The ImmutableMultiBiMap allows the user to have non-unique values V for different keys K and inverts them into a map 
+The ImmutableMultiBimap allows the user to have non-unique values V for different keys K and inverts them into a map 
 that returns a V \-> Set\<K\> map. 
 
 For example,
@@ -38,9 +38,9 @@ Will give the user a map like so
 
 `[ "One" -> Collection<Integer>[1, 2]]`
 
-The `ImmutableMultiBiMap` allows the user to have a non-unique set of vaues as well as inversion by making a Multimap out of the inversion.
+The `ImmutableMultiBimap` allows the user to have a non-unique set of vaues as well as inversion by making a Multimap out of the inversion.
 
-`ImmutableHashMultiBiMap<String, Integer> map = ImmutableHashMultiBiMap.of("Hello", 1, "World", 1);
+`ImmutableHashMultiBimap<String, Integer> map = ImmutableHashMultiBimap.of("Hello", 1, "World", 1);
  Multimap<Integer, String> mapInverse = map.inverse();`
  
  Will give 

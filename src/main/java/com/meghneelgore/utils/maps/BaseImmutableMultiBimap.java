@@ -8,12 +8,12 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Base class implementing the {@link ImmutableMultiBiMap} interface.
+ * Base class implementing the {@link ImmutableMultiBimap} interface.
  *
  * @param <K> Type of keys
  * @param <V> Type of values
  */
-public abstract class BaseImmutableMultiBiMap<K, V> implements ImmutableMultiBiMap<K, V> {
+public abstract class BaseImmutableMultiBimap<K, V> implements ImmutableMultiBimap<K, V> {
 
     /**
      * The backing map for the multibimap
@@ -28,7 +28,7 @@ public abstract class BaseImmutableMultiBiMap<K, V> implements ImmutableMultiBiM
     /**
      * Constructor
      */
-    protected BaseImmutableMultiBiMap() {
+    protected BaseImmutableMultiBimap() {
 
     }
 
