@@ -1,5 +1,9 @@
 package com.meghneelgore.utils.maps;
 
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Multimap;
+
 import java.util.*;
 
 /**
@@ -11,8 +15,8 @@ public class ImmutableHashMultiBiMap<K, V> extends BaseImmutableMultiBiMap<K, V>
     /**
      * Protected construction. This is in keeping with the general API adhered to by the Guava classes too.
      */
-    protected ImmutableHashMultiBiMap(int numEntries) {
-        super(new HashMap<>(numEntries));
+    protected ImmutableHashMultiBiMap() {
+
     }
 
     /**
@@ -25,9 +29,8 @@ public class ImmutableHashMultiBiMap<K, V> extends BaseImmutableMultiBiMap<K, V>
      * @return ImmutableMultiBiMap with the above key value pairs
      */
     public static <K, V> ImmutableHashMultiBiMap<K, V> of(K key1, V value1, K key2, V value2) {
-        ImmutableHashMultiBiMap<K, V> immutableMultiBiMap = new ImmutableHashMultiBiMap<>(2);
-        immutableMultiBiMap.backingMap.put(key1, value1);
-        immutableMultiBiMap.backingMap.put(key2, value2);
+        ImmutableHashMultiBiMap<K, V> immutableMultiBiMap = new ImmutableHashMultiBiMap<>();
+        immutableMultiBiMap.backingMap = ImmutableMap.of(key1, value1, key2, value2);
         immutableMultiBiMap.invertedMap = immutableMultiBiMap.internalInvert();
         return immutableMultiBiMap;
     }
@@ -52,13 +55,14 @@ public class ImmutableHashMultiBiMap<K, V> extends BaseImmutableMultiBiMap<K, V>
         }
 
         public ImmutableHashMultiBiMap<K, V> build() {
-            ImmutableHashMultiBiMap<K, V> map = new ImmutableHashMultiBiMap<>(listOfEntries.size());
+            ImmutableHashMultiBiMap<K, V> map = new ImmutableHashMultiBiMap<>();
+            ImmutableMap.Builder<K, V> builder = new ImmutableMap.Builder<>();
             for (Entry<K, V> entry : listOfEntries) {
-                map.backingMap.put(entry.getKey(), entry.getValue());
+                builder.put(entry.getKey(), entry.getValue());
             }
+            map.backingMap = builder.build();
             map.invertedMap = map.internalInvert();
             return map;
         }
     }
-
 }

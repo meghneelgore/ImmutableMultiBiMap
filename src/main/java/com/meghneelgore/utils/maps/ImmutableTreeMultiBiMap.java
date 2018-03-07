@@ -1,22 +1,15 @@
 package com.meghneelgore.utils.maps;
 
 
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TreeMap;
+import com.google.common.collect.ImmutableSortedMap;
+import com.google.common.collect.TreeMultimap;
+
+import java.util.*;
 
 /**
  * A {@code TreeMap} backed ImmutableMultiBiMap
  */
-public class ImmutableTreeMultiBiMap<K, V> extends BaseImmutableMultiBiMap<K, V> {
-
-    /**
-     * Protected construction. This is in keeping with the general API adhered to by the Guava classes too.
-     */
-    protected ImmutableTreeMultiBiMap() {
-        super(new TreeMap<>());
-    }
+public class ImmutableTreeMultiBiMap<K extends Comparable<K>, V> extends BaseImmutableMultiBiMap<K, V> {
 
     /**
      * Convenience method that helps to build an ImmutableHashMultiBiMap with 2 key-value pairs;
@@ -27,10 +20,9 @@ public class ImmutableTreeMultiBiMap<K, V> extends BaseImmutableMultiBiMap<K, V>
      * @param value2 Value 2
      * @return ImmutableMultiBiMap with the above key value pairs
      */
-    public static <K, V> ImmutableTreeMultiBiMap<K, V> of(K key1, V value1, K key2, V value2) {
+    public static <K extends Comparable<K>, V> ImmutableTreeMultiBiMap<K, V> of(K key1, V value1, K key2, V value2) {
         ImmutableTreeMultiBiMap<K, V> immutableMultiBiMap = new ImmutableTreeMultiBiMap<>();
-        immutableMultiBiMap.backingMap.put(key1, value1);
-        immutableMultiBiMap.backingMap.put(key2, value2);
+        immutableMultiBiMap.backingMap = ImmutableSortedMap.of(key1, value1, key2, value2);
         immutableMultiBiMap.invertedMap = immutableMultiBiMap.internalInvert();
         return immutableMultiBiMap;
     }
@@ -42,7 +34,7 @@ public class ImmutableTreeMultiBiMap<K, V> extends BaseImmutableMultiBiMap<K, V>
      * @param <K> Key type
      * @param <V> Value type
      */
-    public static class Builder<K, V> {
+    public static class Builder<K extends Comparable<K>, V> {
         List<Entry<K, V>> listOfEntries;
 
         public Builder() {
@@ -56,9 +48,11 @@ public class ImmutableTreeMultiBiMap<K, V> extends BaseImmutableMultiBiMap<K, V>
 
         public ImmutableTreeMultiBiMap<K, V> build() {
             ImmutableTreeMultiBiMap<K, V> map = new ImmutableTreeMultiBiMap<>();
+            ImmutableSortedMap.Builder<K, V> builder = new ImmutableSortedMap.Builder<>(Comparable::compareTo);
             for (Entry<K, V> entry : listOfEntries) {
-                map.backingMap.put(entry.getKey(), entry.getValue());
+                builder.put(entry.getKey(), entry.getValue());
             }
+            map.backingMap = builder.build();
             map.invertedMap = map.internalInvert();
             return map;
         }

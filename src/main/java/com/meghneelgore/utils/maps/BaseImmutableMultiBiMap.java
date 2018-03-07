@@ -1,6 +1,8 @@
 package com.meghneelgore.utils.maps;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.ImmutableSortedMap;
 import com.google.common.collect.Multimap;
 
 import java.util.Collection;
@@ -12,7 +14,7 @@ public abstract class BaseImmutableMultiBiMap<K, V> implements ImmutableMultiBiM
     /**
      * The backing map for the multibimap
      */
-    protected final Map<K, V> backingMap;
+    protected ImmutableMap<K, V> backingMap;
 
     /**
      * Save the inverted map. We calculate the inversion at build time since this is an immutable map.
@@ -22,9 +24,10 @@ public abstract class BaseImmutableMultiBiMap<K, V> implements ImmutableMultiBiM
     /**
      * Constructor
      */
-    protected BaseImmutableMultiBiMap(Map<K, V> backingMap) {
-        this.backingMap = backingMap;
+    protected BaseImmutableMultiBiMap() {
+
     }
+
     /**
      * Returns the inverted multimap
      *
