@@ -2,12 +2,13 @@ package com.meghneelgore.utils.maps;
 
 
 import com.google.common.collect.ImmutableSortedMap;
-import com.google.common.collect.TreeMultimap;
 
-import java.util.*;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * A {@code TreeMap} backed ImmutableMultiBiMap
+ * An ImmutableMultiBiMap backed by an {@code ImmutableSortedMap}
  */
 public class ImmutableTreeMultiBiMap<K extends Comparable<K>, V> extends BaseImmutableMultiBiMap<K, V> {
 
