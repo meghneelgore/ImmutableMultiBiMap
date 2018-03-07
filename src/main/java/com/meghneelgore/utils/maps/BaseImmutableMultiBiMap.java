@@ -2,7 +2,6 @@ package com.meghneelgore.utils.maps;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.Multimap;
 
 import java.util.Collection;
 import java.util.Map;
@@ -39,7 +38,7 @@ public abstract class BaseImmutableMultiBiMap<K, V> implements ImmutableMultiBiM
      * @return invertedMap, the inverted MultiMap
      */
     @Override
-    public Multimap<V, K> inverse() {
+    public ImmutableMultimap<V, K> inverse() {
         return invertedMap;
     }
 
