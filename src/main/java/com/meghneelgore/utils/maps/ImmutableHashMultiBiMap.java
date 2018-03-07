@@ -13,26 +13,68 @@ import java.util.List;
 public class ImmutableHashMultiBiMap<K, V> extends BaseImmutableMultiBiMap<K, V> {
 
     /**
-     * Protected construction. This is in keeping with the general API adhered to by the Guava classes too.
+     * Protected construction.
      */
     protected ImmutableHashMultiBiMap() {
 
     }
 
     /**
-     * Convenience method that helps to build an ImmutableHashMultiBiMap with 2 key-value pairs;
+     * Returns an immutable multibimap containing a single entry.
+     */
+    public static <K, V> ImmutableHashMultiBiMap<K, V> of(K key1, V value1) {
+        ImmutableHashMultiBiMap<K, V> map = new ImmutableHashMultiBiMap<>();
+        map.backingMap = ImmutableMap.of(key1, value1);
+        map.invertedMap = map.internalInvert();
+        return map;
+    }
+
+    /**
+     * Returns an immutable map containing the given entries, in order.
      *
-     * @param key1   Key 1
-     * @param value1 Value 1
-     * @param key2   Key 2
-     * @param value2 Value 2
-     * @return ImmutableMultiBiMap with the above key value pairs
+     * @throws IllegalArgumentException if duplicate keys are provided
      */
     public static <K, V> ImmutableHashMultiBiMap<K, V> of(K key1, V value1, K key2, V value2) {
-        ImmutableHashMultiBiMap<K, V> immutableMultiBiMap = new ImmutableHashMultiBiMap<>();
-        immutableMultiBiMap.backingMap = ImmutableMap.of(key1, value1, key2, value2);
-        immutableMultiBiMap.invertedMap = immutableMultiBiMap.internalInvert();
-        return immutableMultiBiMap;
+        ImmutableHashMultiBiMap<K, V> map = new ImmutableHashMultiBiMap<>();
+        map.backingMap = ImmutableMap.of(key1, value1, key2, value2);
+        map.invertedMap = map.internalInvert();
+        return map;
+    }
+
+    /**
+     * Returns an immutable map containing the given entries, in order.
+     *
+     * @throws IllegalArgumentException if duplicate keys are provided
+     */
+    public static <K, V> ImmutableHashMultiBiMap<K, V> of(K key1, V value1, K key2, V value2, K key3, V value3) {
+        ImmutableHashMultiBiMap<K, V> map = new ImmutableHashMultiBiMap<>();
+        map.backingMap = ImmutableMap.of(key1, value1, key2, value2, key3, value3);
+        map.invertedMap = map.internalInvert();
+        return map;
+    }
+
+    /**
+     * Returns an immutable map containing the given entries, in order.
+     *
+     * @throws IllegalArgumentException if duplicate keys are provided
+     */
+    public static <K, V> ImmutableHashMultiBiMap<K, V> of(K key1, V value1, K key2, V value2, K key3, V value3, K key4, V value4) {
+        ImmutableHashMultiBiMap<K, V> map = new ImmutableHashMultiBiMap<>();
+        map.backingMap = ImmutableMap.of(key1, value1, key2, value2, key3, value3, key4, value4);
+        map.invertedMap = map.internalInvert();
+        return map;
+    }
+
+    /**
+     * Returns an immutable map containing the given entries, in order.
+     *
+     * @throws IllegalArgumentException if duplicate keys are provided
+     */
+    public static <K, V> ImmutableHashMultiBiMap<K, V> of(K key1, V value1, K key2, V value2, K key3, V value3, K key4, V value4, K key5, V value5) {
+        ImmutableHashMultiBiMap<K, V> map = new ImmutableHashMultiBiMap<>();
+        map.backingMap = ImmutableMap.of(key1, value1, key2, value2, key3, value3, key4, value4, key5, value5);
+        map.invertedMap = map.internalInvert();
+        return map;
     }
 
 
