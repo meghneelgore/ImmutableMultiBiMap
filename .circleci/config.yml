@@ -43,6 +43,6 @@ jobs:
       # make jar
       - run: gradle jar
       - store_artifacts:
-          path: build/libs/ImmutableMultiBiMap-1.0-SNAPSHOT.jar
+          path: build/libs/
 
 
