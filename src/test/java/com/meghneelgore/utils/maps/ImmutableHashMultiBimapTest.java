@@ -18,6 +18,7 @@ public class ImmutableHashMultiBimapTest {
         ImmutableList<String> list = ImmutableList.of("Hello", "World");
 
         Assert.assertEquals("Wrong inverse map", list, mapInverse.get(1));
+        Assert.assertFalse(true);
     }
 
     @Test
