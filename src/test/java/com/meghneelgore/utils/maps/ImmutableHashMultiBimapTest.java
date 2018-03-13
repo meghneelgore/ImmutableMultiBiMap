@@ -9,6 +9,74 @@ import org.junit.Test;
 public class ImmutableHashMultiBimapTest {
 
     @Test
+    public void testOnePairInit() {
+        ImmutableMultiBimap<String, String> map = ImmutableHashMultiBimap.of("Hello", "World");
+        Assert.assertEquals("Map initialized wrongly", "World", map.get("Hello"));
+        Assert.assertEquals("Map initialized wrongly", ImmutableList.of("Hello"), map.inverse().get("World"));
+    }
+
+    @Test
+    public void testTwoPairInit() {
+        ImmutableMultiBimap<String, String> map = ImmutableHashMultiBimap.of("Hello", "World", "Foo", "Bar");
+        Assert.assertEquals("Map initialized wrongly", "World", map.get("Hello"));
+        Assert.assertEquals("Map initialized wrongly", "Bar", map.get("Foo"));
+        Assert.assertEquals("Map initialized wrongly", ImmutableList.of("Hello"), map.inverse().get("World"));
+        Assert.assertEquals("Map initialized wrongly", ImmutableList.of("Foo"), map.inverse().get("Bar"));
+    }
+
+    @Test
+    public void testThreePairInit() {
+        ImmutableMultiBimap<String, String> map = ImmutableHashMultiBimap.of("Hello", "World", "Foo", "Bar", "Ugly", "Duckling");
+        Assert.assertEquals("Map initialized wrongly", "World", map.get("Hello"));
+        Assert.assertEquals("Map initialized wrongly", "Bar", map.get("Foo"));
+        Assert.assertEquals("Map initialized wrongly", "Duckling", map.get("Ugly"));
+        Assert.assertEquals("Map initialized wrongly", ImmutableList.of("Hello"), map.inverse().get("World"));
+        Assert.assertEquals("Map initialized wrongly", ImmutableList.of("Foo"), map.inverse().get("Bar"));
+        Assert.assertEquals("Map initialized wrongly", ImmutableList.of("Ugly"), map.inverse().get("Duckling"));
+    }
+
+    @Test
+    public void testFourPairInit() {
+        ImmutableMultiBimap<String, String> map =
+                ImmutableHashMultiBimap.of
+                        ("Hello", "World",
+                                "Foo", "Bar",
+                                "Ugly", "Duckling",
+                                "House", "Boat");
+        Assert.assertEquals("Map initialized wrongly", "World", map.get("Hello"));
+        Assert.assertEquals("Map initialized wrongly", "Bar", map.get("Foo"));
+        Assert.assertEquals("Map initialized wrongly", "Duckling", map.get("Ugly"));
+        Assert.assertEquals("Map initialized wrongly", "Boat", map.get("House"));
+        Assert.assertEquals("Map initialized wrongly", ImmutableList.of("Hello"), map.inverse().get("World"));
+        Assert.assertEquals("Map initialized wrongly", ImmutableList.of("Foo"), map.inverse().get("Bar"));
+        Assert.assertEquals("Map initialized wrongly", ImmutableList.of("Ugly"), map.inverse().get("Duckling"));
+        Assert.assertEquals("Map initialized wrongly", ImmutableList.of("House"), map.inverse().get("Boat"));
+    }
+
+    @Test
+    public void testFivePairInit() {
+        ImmutableMultiBimap<String, String> map =
+                ImmutableHashMultiBimap.of
+                        (
+                                "Hello", "World",
+                                "Foo", "Bar",
+                                "Ugly", "Duckling",
+                                "House", "Boat",
+                                "Coffee", "Table"
+                        );
+        Assert.assertEquals("Map initialized wrongly", "World", map.get("Hello"));
+        Assert.assertEquals("Map initialized wrongly", "Bar", map.get("Foo"));
+        Assert.assertEquals("Map initialized wrongly", "Duckling", map.get("Ugly"));
+        Assert.assertEquals("Map initialized wrongly", "Boat", map.get("House"));
+        Assert.assertEquals("Map initialized wrongly", "Table", map.get("Coffee"));
+        Assert.assertEquals("Map initialized wrongly", ImmutableList.of("Hello"), map.inverse().get("World"));
+        Assert.assertEquals("Map initialized wrongly", ImmutableList.of("Foo"), map.inverse().get("Bar"));
+        Assert.assertEquals("Map initialized wrongly", ImmutableList.of("Ugly"), map.inverse().get("Duckling"));
+        Assert.assertEquals("Map initialized wrongly", ImmutableList.of("Coffee"), map.inverse().get("Table"));
+    }
+
+
+    @Test
     public void testInverseForSameValues() {
         ImmutableHashMultiBimap<String, Integer> map = ImmutableHashMultiBimap.of("Hello", 1, "World", 1);
         Multimap<Integer, String> mapInverse = map.inverse();

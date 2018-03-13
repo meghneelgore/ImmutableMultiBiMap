@@ -10,7 +10,7 @@ import java.util.Map;
  * as well as values. The ImmutableMultiBimap has no such restriction, however. This also leads to the inverse() function
  * to return a {@code MultiMap<V, K>} because ostensibly, there may be multiple keys that map to the same value.
  * <p>
- * It also restricts the inverse() function to be one-way, so the ImmutableMultiBimap.inverse().inverse() can't be
+ * It also restricts the inverse() function to be one-way, so ImmutableMultiBimap.inverse().inverse() can't be
  * performed.
  */
 public interface ImmutableMultiBimap<K, V> extends Map<K, V> {
@@ -21,4 +21,6 @@ public interface ImmutableMultiBimap<K, V> extends Map<K, V> {
      * @return {@code ImmutableMultiMap<V, K>}
      */
     ImmutableMultimap<V, K> inverse();
+
+
 }
