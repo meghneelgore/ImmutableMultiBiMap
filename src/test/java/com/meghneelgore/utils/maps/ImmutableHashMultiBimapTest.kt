@@ -2,7 +2,6 @@ package com.meghneelgore.utils.maps
 
 import com.google.common.collect.ImmutableList
 import com.google.common.collect.Multimap
-import com.meghneelgore.utils.maps.ImmutableHashMultiBimap
 import com.meghneelgore.utils.maps.ImmutableHashMultiBimap.Companion.of
 import org.junit.Assert
 import org.junit.Test
